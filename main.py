@@ -18,9 +18,8 @@ def mostrarMenu():
     print("5. Salir")
     print("=========================================")
 
-def main():
-    pilotos = []
-    pilotos=llenar()
+main()
+=======
     opcion = 0
 
     while opcion != 5:
@@ -49,4 +48,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
