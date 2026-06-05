@@ -1,4 +1,4 @@
-from llenar_bd import *
+from funciones import *
 def main():
     pilotos = []
     pilotos=llenar()

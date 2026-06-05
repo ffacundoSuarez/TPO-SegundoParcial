@@ -1,4 +1,5 @@
 def llenar():
+    """Retorna matriz 10x7 con datos de pilotos F1."""
     return [
         ["Max Verstappen", 1, "RedBull", 350, 87.45, 2500000.00, 1],
         ["Charles Leclerc", 16, "Ferrari", 280, 88.15, 2200000.00, 1],
@@ -11,3 +12,6 @@ def llenar():
         ["George Russell", 63, "Mercedes", 220, 88.50, 1950000.00, 2],
         ["Fernando Alonso", 14, "Aston Martin", 120, 89.50, 1900000.00, 3]
     ]
+    
+def eliminar_piloto():
+    
