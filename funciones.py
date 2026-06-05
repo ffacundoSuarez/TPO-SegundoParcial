@@ -13,5 +13,13 @@ def llenar():
         ["Fernando Alonso", 14, "Aston Martin", 120, 89.50, 1900000.00, 3]
     ]
     
-def eliminar_piloto():
-    
+def eliminar_piloto(pilotos):
+    n=int(input("Dime el numero del monoplaza que quieres eliminar"))
+    f=0
+    while f < len(pilotos) and pilotos[f][1] != n:
+        f+=1
+    if f<len(pilotos):
+        print(pilotos[f])
+        pilotos.pop(f)
+    else:
+        print("No encontrado")
