@@ -67,39 +67,39 @@ def registrarPilotos(pilotos):
             
             # Nombre (Debe tener exactamente dos palabras)
             nombre = input("Ingrese el nombre del piloto (debe tener dos palabras, nombre y apellido): ")
-            while len(nombre.strip().split()) != 2:
+            while len(nombre.split()) != 2:
                 nombre = input("Nombre inválido (debe tener dos palabras). Intente nuevamente: ")
             
-            # Número de monoplaza (Entero positivo, no rompe si ponen letras)
+            # Número de monoplaza
             numero = input("Ingrese el número identificatorio de monoplaza (debe ser un número positivo): ")
             while not numero.isdigit() or int(numero) <= 0:
                 numero = input("Número inválido. Intente nuevamente: ")
             numero = int(numero)
             
-            # Escudería (No puede estar vacía)
+            # Escudería
             escuderia = input("Ingrese la escudería del piloto: ")
             while escuderia == "":
                 escuderia = input("El campo no puede quedar vacío. Ingrese la escudería: ")
             
-            # Puntos acumulados (Entero positivo o cero)
+            # Puntos acumulados
             puntos = input("Ingrese los puntos acumulados en el campeonato: ")
             while not puntos.isdigit() or int(puntos) < 0:
                 puntos = input("Cantidad de puntos inválida. Intente nuevamente: ")
             puntos = int(puntos)
             
-            # Tiempo promedio (Float positivo - Usa el truco del replace para el punto decimal)
+            # Tiempo promedio
             tiempo = input("Ingrese el tiempo promedio por vuelta (en segundos): ")
             while not tiempo.replace('.', '', 1).isdigit():
                 tiempo = input("Tiempo inválido. Intente nuevamente: ")
             tiempo = float(tiempo)
             
-            # Presupuesto (Float positivo - Usa el truco del replace para el punto decimal)
+            # Presupuesto
             presupuesto = input("Ingrese el presupuesto designado al piloto (USD): ")
             while not presupuesto.replace('.', '', 1).isdigit():
                 presupuesto = input("Presupuesto inválido. Intente nuevamente: ")
             presupuesto = float(presupuesto)
             
-            # Abandonos (Entero positivo o cero)
+            # Abandonos
             abandonos = input("Ingrese la cantidad de abandonos del piloto en la temporada: ")
             while not abandonos.isdigit() or int(abandonos) < 0:
                 abandonos = input("Cantidad de abandonos inválida. Intente nuevamente: ")
