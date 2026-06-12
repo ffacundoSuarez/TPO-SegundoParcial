@@ -37,6 +37,7 @@ def mostrarMenu():
     print("=========================================")
 
 # Ejercicio 1 -- Alta del piloto
+# Hecho por Tomas Prieto
 def registrarPilotos(pilotos):
     """
     Permite registrar uno o varios pilotos en la lista.
@@ -132,6 +133,7 @@ def registrarPilotos(pilotos):
     print(pilotos)
 
 # Ejercicio 2 -- Baja del piloto
+# Hecho por Juan Ignacio Teruya
 def eliminar_piloto(pilotos):
     """
     Elimina un piloto de la lista buscandolo por numero de monoplaza.
@@ -154,6 +156,7 @@ def eliminar_piloto(pilotos):
         print("No encontrado")
 
 # Ejercicio 3 -- Modificacion Puntos o Tiempos de un piloto
+# Hecho por Facundo Suarez
 def ModificarPuntos_TiempoPromedio(pilotos):
     """
     Permite modificar los puntos acumulados y/o el tiempo promedio por vuelta de un piloto.
@@ -228,7 +231,8 @@ def ModificarPuntos_TiempoPromedio(pilotos):
 
         
 
-# Ejercicio 4 - Informe general: Parte de ordenar los pilotos    
+# Ejercicio 4 - Informe general: Parte de ordenar los pilotos
+# Hecho por Juan Ignacio Teruya
 def ordenarPilotos(pilotos):
     """
     Ordena la lista de pilotos usando el algoritmo de burbujeo.
@@ -250,6 +254,7 @@ def ordenarPilotos(pilotos):
                     pilotos[j+1]=aux
 
 # Ejercicio 4 - Informe general: Parte de mostrar los pilotos
+# Hecho por Juan Ignacio Teruya
 def mostrarPilotos(pilotos):
     print("="*len(f"{'Piloto':<20} {'Nº':<4} {'Equipo':<18} {'Puntos':<8} {'Tiempo Prom':<12} {'Salario':<15} {'Podios':<6}"))
     print(f"{'Piloto':<20} {'Nº':<4} {'Equipo':<18} {'Puntos':<8} {'Tiempo Prom':<12} {'Salario':<15} {'Podios':<6}")
@@ -259,6 +264,7 @@ def mostrarPilotos(pilotos):
     print("="*len(f"{'Piloto':<20} {'Nº':<4} {'Equipo':<18} {'Puntos':<8} {'Tiempo Prom':<12} {'Salario':<15} {'Podios':<6}"))
 
 # Ejercicio 4 -- Informe, que llama a las dos funciones superiores
+# Hecho por Juan Ignacio Teruya
 def informeGeneral(pilotos):
     """
     Genera el informe general del campeonato.
