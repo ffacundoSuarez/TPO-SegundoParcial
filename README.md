@@ -3,7 +3,7 @@
 Este proyecto corresponde al Trabajo Práctico Obligatorio (**TPO - Grupo 3**) para la materia de Fundamentos de Informática. Consiste en una aplicación de consola desarrollada en Python orientada a la gestión y análisis de rendimiento de pilotos de Fórmula 1, utilizando estructuras de datos bidimensionales (matrices) y desarrollo modular.
 
 ## 🔗 URL del Repositorio de GitHub
-[https://github.com/Grupo3-TPO/Velocity-Racing-Team](https://github.com/Grupo3-TPO/Velocity-Racing-Team)
+[https://github.com/ffacundoSuarez/TPO-SegundoParcial.git](https://github.com/ffacundoSuarez/TPO-SegundoParcial.git)
 
 ---
 
