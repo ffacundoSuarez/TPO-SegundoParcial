@@ -88,7 +88,8 @@ def registrarPilotos(pilotos):
             puntos = int(puntos)
             
             # Tiempo promedio
-            tiempo = input("Ingrese el tiempo promedio por vuelta (en segundos): ")
+            #tiempo = ingresarDecimal("Ingrese el tiempo promedio por vuelta (en segundos): ")
+            tiempo=input("Ingrese el tiempo promedio por vuelta (en segundos): ")
             while not tiempo.replace('.', '', 1).isdigit():
                 tiempo = input("Tiempo inválido. Intente nuevamente: ")
             tiempo = float(tiempo)
