@@ -5,7 +5,7 @@ def llenar():
     """
     Carga y retorna la matriz inicial de pilotos con datos predefinidos.
     Cada fila representa un piloto con el siguiente formato:
-    [nombre, numero_monoplaza, escuderia, puntos, tiempo_promedio, salario, podios]
+    [nombre, numero_monoplaza, escuderia, puntos, tiempo_promedio, salario, abandonos]
     """
     return [
         ["Max Verstappen", 1, "RedBull", 350, 87.45, 2500000.00, 1],
