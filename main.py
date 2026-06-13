@@ -17,15 +17,29 @@ def main():
     pilotos=llenar()
     while opcion != 5:
         mostrarMenu()
-
-        opcion = int(input("Seleccione una opcion (1-5): "))
-
+        opcion = input("Seleccione una opcion (1-5): ")
+        while not opcion.isdigit() or int(opcion) < 0:
+                opcion = input("Numero invalido intente nuevamente: ")
+        opcion = int(opcion)
         if opcion == 1:
             print("\n [Acceso] Registrar Piloto (Alta)")
             registrarPilotos(pilotos)
         elif opcion == 2:
             print("\n [Acceso] Eliminar Piloto (Baja)")
-            eliminar_piloto(pilotos)
+            n=input("Dime el numero del monoplaza que quieres eliminar: ")
+            while not n.isdigit() or int(n) < 0:
+                n = input("Numero de monoplaza invalido. Intente nuevamente: ")
+            n = int(n)
+            pos=buscar_piloto_por_numero(pilotos, n)
+            if pos==-1:
+                print("Piloto no fue encontrado")
+            else:
+                decision=input("Estas seguro de que quieres borrarlo, si es asi pon 1, sino pon 0: ")
+                if decision==1:
+                    eliminar_piloto(pilotos,pos)
+                    print("El piloto ha sido eliminado con exito")
+                else:
+                    print("Piloto no fue eliminado")
         elif opcion == 3:
             print("\n [Acceso] Modificar Puntos o tiempo promedio")
             ModificarPuntos_TiempoPromedio(pilotos)

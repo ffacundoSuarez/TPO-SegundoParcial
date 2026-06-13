@@ -135,26 +135,15 @@ def registrarPilotos(pilotos):
 
 # Ejercicio 2 -- Baja del piloto
 # Hecho por Juan Ignacio Teruya
-def eliminar_piloto(pilotos):
+def eliminar_piloto(pilotos,n):
     """
-    Elimina un piloto de la lista buscandolo por numero de monoplaza.
-    Solicita confirmacion al usuario antes de realizar la eliminacion.
+    Elimina un piloto de la lista a través de la posición del monoplaza.
     Parametros:
         pilotos (list): lista principal de pilotos.
+        n (int): posicion del piloto en la lista
     """
-    n=int(input("Dime el numero del monoplaza que quieres eliminar: "))
-    f=0
-    while f < len(pilotos) and pilotos[f][1] != n:
-        f+=1
-    if f<len(pilotos):
-        decision=int(input("Estas seguro de que quieres borrarlo, si es asi pon 1, sino pon 0: "))
-        if decision==1:
-            pilotos.pop(f)
-            print("El piloto ha sido eliminado con exito")
-        else:
-            print("No se ha eliminado el piloto")
-    else:
-        print("No encontrado")
+    pilotos.pop(n)
+
 
 # Ejercicio 3 -- Modificacion Puntos o Tiempos de un piloto
 # Hecho por Facundo Suarez
@@ -277,4 +266,24 @@ def informeGeneral(pilotos):
     ordenarPilotos(pilotos)
     mostrarPilotos(pilotos)
 
-
+# Busca el monoplaza por número
+# Hecho por Juan Ignacio Teruya
+def buscar_piloto_por_numero(pilotos, numero):
+    """
+    Busca un piloto por su número de monoplaza usando un ciclo while.
+    
+    Parametros:
+        pilotos (list): lista principal de pilotos
+        numero (int): número a buscar
+    
+    Retorna:
+        int: índice del piloto encontrado, o -1 si no existe
+    """
+    i = 0
+    while i < len(pilotos) and pilotos[i][1] != numero:
+        i += 1
+    
+    if i == len(pilotos):
+        return -1
+    else:
+        return i
