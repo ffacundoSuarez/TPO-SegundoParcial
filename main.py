@@ -34,15 +34,38 @@ def main():
             if pos==-1:
                 print("Piloto no fue encontrado")
             else:
-                decision=input("Estas seguro de que quieres borrarlo, si es asi pon 1, sino pon 0: ")
+                decision=int(input("Estas seguro de que quieres borrarlo, si es asi pon 1, sino pon 0: "))
                 if decision==1:
                     eliminar_piloto(pilotos,pos)
                     print("El piloto ha sido eliminado con exito")
                 else:
                     print("Piloto no fue eliminado")
+
         elif opcion == 3:
+
             print("\n [Acceso] Modificar Puntos o tiempo promedio")
-            ModificarPuntos_TiempoPromedio(pilotos)
+            print("1. Buscar por nombre")
+            print("2. Buscar por numero de monoplaza")
+
+            criterio = input("Como desea buscar al piloto? (1-2): ")
+            while not criterio.isdigit() or (int(criterio) != 1 and int(criterio) != 2):
+                criterio = input("Opcion invalida, intente nuevamente (1-2): ")
+            criterio = int(criterio)
+
+            if criterio == 1:
+                nombre = input("Ingrese el nombre del piloto: ")
+                pos = buscar_piloto_por_nombre(pilotos, nombre)
+            else:
+                numero = input("Ingrese el numero de monoplaza: ")
+                while not numero.isdigit() or int(numero) <= 0:
+                    numero = input("Debe ser un numero entero positivo: ")
+                numero = int(numero)
+                pos = buscar_piloto_por_numero(pilotos, numero)
+
+            if pos == -1:
+                print("No se encontro ningun piloto con los datos ingresados.")
+            else:
+                MenuModificacion(pilotos, pos)
         elif opcion == 4:
             print("\n [Acceso] Informe General")
             informeGeneral(pilotos)
