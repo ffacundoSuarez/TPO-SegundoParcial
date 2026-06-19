@@ -38,14 +38,36 @@ def mostrarMenu():
 
 # Ejercicio 1 -- Alta del piloto
 # Hecho por Tomas Prieto
+# =================================================================
+# FUNCIONES AUXILIARES DE VALIDACIÓN (Modulación para ahorrar código)
+# =================================================================
+
+def solicitar_float(mensaje, mensaje_error):
+    """Pide un número decimal positivo y lo valida."""
+    valor = input(mensaje)
+    while not valor.replace('.', '', 1).isdigit():
+        valor = input(mensaje_error)
+    return float(valor)
+
+def solicitar_entero_no_negativo(mensaje, mensaje_error):
+    """Pide un entero mayor o igual a cero y lo valida."""
+    valor = input(mensaje)
+    while not valor.isdigit() or int(valor) < 0:
+        valor = input(mensaje_error)
+    return int(valor)
+
+def solicitar_entero_positivo(mensaje, mensaje_error):
+    """Pide un entero mayor a cero y lo valida."""
+    valor = input(mensaje)
+    while not valor.isdigit() or int(valor) <= 0:
+        valor = input(mensaje_error)
+    return int(valor)
+
+
+
 def registrarPilotos(pilotos):
     """
     Permite registrar uno o varios pilotos en la lista.
-    El usuario elige entre carga manual (ingreso por teclado)
-    o carga automatica (generacion con valores aleatorios via random).
-    Valida cada campo ingresado antes de agregarlo a la lista.
-    Parametros:
-        pilotos (list): lista principal donde se agregan los nuevos pilotos.
     """
     print("\n--- Se eligió la opción 1 para registrar pilotos ---")
     
@@ -70,41 +92,40 @@ def registrarPilotos(pilotos):
             while len(nombre.split()) != 2:
                 nombre = input("Nombre inválido (debe tener dos palabras). Intente nuevamente: ")
             
-            # Número de monoplaza
-            numero = input("Ingrese el número identificatorio de monoplaza (debe ser un número positivo): ")
-            while not numero.isdigit() or int(numero) <= 0:
-                numero = input("Número inválido. Intente nuevamente: ")
-            numero = int(numero)
+            # Número de monoplaza 
+            numero = solicitar_entero_positivo(
+                "Ingrese el número identificatorio de monoplaza (debe ser un número positivo): ",
+                "Número inválido. Intente nuevamente: "
+            )
             
             # Escudería
             escuderia = input("Ingrese la escudería del piloto: ")
             while escuderia == "":
                 escuderia = input("El campo no puede quedar vacío. Ingrese la escudería: ")
             
-            # Puntos acumulados
-            puntos = input("Ingrese los puntos acumulados en el campeonato: ")
-            while not puntos.isdigit() or int(puntos) < 0:
-                puntos = input("Cantidad de puntos inválida. Intente nuevamente: ")
-            puntos = int(puntos)
+            # Puntos acumulados 
+            puntos = solicitar_entero_no_negativo(
+                "Ingrese los puntos acumulados en el campeonato: ",
+                "Cantidad de puntos inválida. Intente nuevamente: "
+            )
             
-            # Tiempo promedio
-            #tiempo = ingresarDecimal("Ingrese el tiempo promedio por vuelta (en segundos): ")
-            tiempo=input("Ingrese el tiempo promedio por vuelta (en segundos): ")
-            while not tiempo.replace('.', '', 1).isdigit():
-                tiempo = input("Tiempo inválido. Intente nuevamente: ")
-            tiempo = float(tiempo)
+            # Tiempo promedio 
+            tiempo = solicitar_float(
+                "Ingrese el tiempo promedio por vuelta (en segundos): ",
+                "Tiempo inválido. Intente nuevamente: "
+            )
             
-            # Presupuesto
-            presupuesto = input("Ingrese el presupuesto designado al piloto (USD): ")
-            while not presupuesto.replace('.', '', 1).isdigit():
-                presupuesto = input("Presupuesto inválido. Intente nuevamente: ")
-            presupuesto = float(presupuesto)
+            # Presupuesto 
+            presupuesto = solicitar_float(
+                "Ingrese el presupuesto designado al piloto (USD): ",
+                "Presupuesto inválido. Intente nuevamente: "
+            )
             
-            # Abandonos
-            abandonos = input("Ingrese la cantidad de abandonos del piloto en la temporada: ")
-            while not abandonos.isdigit() or int(abandonos) < 0:
-                abandonos = input("Cantidad de abandonos inválida. Intente nuevamente: ")
-            abandonos = int(abandonos)
+            # Abandonos 
+            abandonos = solicitar_entero_no_negativo(
+                "Ingrese la cantidad de abandonos del piloto en la temporada: ",
+                "Cantidad de abandonos inválida. Intente nuevamente: "
+            )
             
             # Guardamos el nuevo piloto en la matriz
             nuevo_piloto = [nombre, numero, escuderia, puntos, tiempo, presupuesto, abandonos]
@@ -113,7 +134,6 @@ def registrarPilotos(pilotos):
 
     # ================= CARGA AUTOMÁTICA =================
     elif opcion == "2":
-        # Renombrados de mock a aleatorio.
         nombres_aleatorio = ["Lewis Hamilton", "George Russell", "Carlos Sainz", "Oscar Piastri", "Fernando Alonso", "Pierre Gasly"]
         escuderias_aleatorio = ["Mercedes", "Ferrari", "McLaren", "Aston Martin", "Alpine"]
         
@@ -132,6 +152,7 @@ def registrarPilotos(pilotos):
 
     print("\n--- Matriz actual de pilotos ---")
     print(pilotos)
+
 
 # Ejercicio 2 -- Baja del piloto
 # Hecho por Juan Ignacio Teruya
