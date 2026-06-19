@@ -63,7 +63,10 @@ def solicitar_entero_positivo(mensaje, mensaje_error):
         valor = input(mensaje_error)
     return int(valor)
 
-
+def agregarPiloto(pilotos, nombre, numero, escuderia, puntos, tiempo, presupuesto, abandonos):
+    nuevo_piloto = [nombre, numero, escuderia, puntos, tiempo, presupuesto, abandonos]
+    pilotos.append(nuevo_piloto)
+    print(f"¡Piloto {nombre} registrado con éxito en la matriz!")
 
 def registrarPilotos(pilotos):
     """
@@ -128,9 +131,9 @@ def registrarPilotos(pilotos):
             )
             
             # Guardamos el nuevo piloto en la matriz
-            nuevo_piloto = [nombre, numero, escuderia, puntos, tiempo, presupuesto, abandonos]
-            pilotos.append(nuevo_piloto)
-            print(f"¡Piloto {nombre} registrado con éxito en la matriz!")
+            agregarPiloto(pilotos, nombre, numero, escuderia, puntos, tiempo, presupuesto, abandonos)
+            
+            
 
     # ================= CARGA AUTOMÁTICA =================
     elif opcion == "2":
