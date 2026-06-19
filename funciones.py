@@ -89,7 +89,7 @@ def registrarPilotos(pilotos):
             
             # Nombre (Debe tener exactamente dos palabras)
             nombre = input("Ingrese el nombre del piloto (debe tener dos palabras, nombre y apellido): ")
-            while len(nombre.split()) != 2:
+            while len(nombre.split()) != 2 or buscar_piloto_por_nombre(pilotos, nombre) != -1:
                 nombre = input("Nombre inválido (debe tener dos palabras). Intente nuevamente: ")
             
             # Número de monoplaza 
