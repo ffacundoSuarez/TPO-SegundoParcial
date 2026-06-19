@@ -145,9 +145,68 @@ def eliminar_piloto(pilotos,n):
     pilotos.pop(n)
 
 
+
 # Ejercicio 3 -- Modificacion Puntos o Tiempos de un piloto
+# Busca el piloto por nombre
+def buscar_piloto_por_nombre(pilotos, nombre):
+    """
+    Busca un piloto por su nombre usando un ciclo while.
+    Parametros:
+        pilotos (list): lista principal de pilotos
+        nombre (str): nombre a buscar
+    Retorna:
+        int: indice del piloto encontrado, o -1 si no existe
+    """
+    i = 0
+    while i < len(pilotos) and pilotos[i][0].lower() != nombre.lower():
+        i += 1
+
+    if i == len(pilotos):
+        return -1
+    else:
+        return i
+
+def mostrarDatosPiloto(piloto):
+    """
+    Muestra por pantalla los datos principales de un piloto.
+    Parametros:
+        piloto (list): fila individual de la matriz de pilotos.
+    """
+    print(f"\n=========================================")
+    print(f"Piloto: {piloto[0]} | Monoplaza: #{piloto[1]}")
+    print(f"Puntos actuales: {piloto[3]} | Tiempo actual: {piloto[4]} segs")
+    print(f"=========================================")
+
+def ModificacionStatsPiloto(pilotos, pos, opcion):
+    """
+    Ejecuta la modificacion de puntos o tiempo promedio de un piloto
+    segun la opcion seleccionada en el submenu.
+    Parametros:
+        pilotos (list): lista principal de pilotos.
+        pos (int): indice del piloto a modificar.
+        opcion (int): opcion elegida (1 = puntos, 2 = tiempo, 3 = volver).
+    """
+    if opcion == 1:
+        nuevos_puntos = input("Ingrese los nuevos puntos acumulados (entero >= 0): ")
+        while not nuevos_puntos.isdigit():
+            nuevos_puntos = input("Valor invalido, debe ser un entero >= 0: ")
+        nuevos_puntos = int(nuevos_puntos)
+        pilotos[pos][3] = nuevos_puntos
+        print(f"Puntos actualizados a {pilotos[pos][3]}.")
+
+    elif opcion == 2:
+        nuevo_tiempo = input("Ingrese el nuevo tiempo promedio en segundos (>= 0): ")
+        while not nuevo_tiempo.replace('.', '', 1).isdigit():
+            nuevo_tiempo = input("Tiempo invalido, debe ser un numero (puede tener decimales): ")
+        nuevo_tiempo = float(nuevo_tiempo)
+        pilotos[pos][4] = nuevo_tiempo
+        print(f"Tiempo actualizado a {pilotos[pos][4]} segs.")
+
+    elif opcion != 3:
+        print("Opcion invalida. Elija entre 1 y 3.")
+
 # Hecho por Facundo Suarez
-def ModificarPuntos_TiempoPromedio(pilotos):
+def MenuModificacion(pilotos, pos):
     """
     Permite modificar los puntos acumulados y/o el tiempo promedio por vuelta de un piloto.
     El usuario elige si buscar al piloto por nombre o por numero de monoplaza.
@@ -156,66 +215,20 @@ def ModificarPuntos_TiempoPromedio(pilotos):
     Parametros:
         pilotos (list): lista principal de pilotos.
     """
-    print("\n--- Modificar Puntos o Tiempo Promedio ---")
-    print("1. Buscar por nombre")
-    print("2. Buscar por numero de monoplaza")
-
-    criterio = int(input("Como desea buscar al piloto? (1-2): "))
-    while criterio != 1 and criterio != 2:
-        criterio = int(input("Opcion invalida, intente nuevamente (1-2): "))
-
-    id_piloto = -1
-    i = 0
-
-    if criterio == 1:
-        busqueda = input("Ingrese el nombre del piloto: ")
-        while i < len(pilotos) and id_piloto == -1:
-            if pilotos[i][0].lower() == busqueda.lower():
-                id_piloto = i
-            i += 1
-    else:
-        numero = int(input("Ingrese el numero de monoplaza: "))
-        while numero <= 0:
-            numero = int(input("Debe ser un numero positivo: "))
-        while i < len(pilotos) and id_piloto == -1:
-            if pilotos[i][1] == numero:
-                id_piloto = i
-            i += 1
-
-    if id_piloto == -1:
-        print("No se encontro ningun piloto con los datos ingresados.")
-        return
-
-    opcion = 0
+    opcion = 0  
     while opcion != 3:
-        piloto = pilotos[id_piloto]
-        print(f"\n=========================================")
-        print(f"Piloto: {piloto[0]} | Monoplaza: #{piloto[1]}")
-        print(f"Puntos actuales: {piloto[3]} | Tiempo actual: {piloto[4]} segs")
-        print(f"=========================================")
+        mostrarDatosPiloto(pilotos[pos])
         print("1. Modificar Puntos Acumulados")
         print("2. Modificar Tiempo Promedio por Vuelta")
         print("3. Volver al menu principal")
         print("=========================================")
 
-        opcion = int(input("Seleccione una opcion (1-3): "))
+        opcion = input("Seleccione una opcion (1-3): ")
+        while not opcion.isdigit() or int(opcion) < 1 or int(opcion) > 3:
+            opcion = input("Opcion invalida, ingrese 1, 2 o 3: ")
+        opcion = int(opcion)    
 
-        if opcion == 1:
-            nuevos_puntos = int(input("Ingrese los nuevos puntos acumulados (entero >= 0): "))
-            while nuevos_puntos < 0:
-                nuevos_puntos = int(input("Los puntos no pueden ser negativos: "))
-            pilotos[id_piloto][3] = nuevos_puntos
-            print(f"Puntos actualizados a {pilotos[id_piloto][3]}.")
-
-        elif opcion == 2:
-            nuevo_tiempo = float(input("Ingrese el nuevo tiempo promedio en segundos (>= 0): "))
-            while nuevo_tiempo < 0:
-                nuevo_tiempo = float(input("El tiempo no puede ser negativo: "))
-            pilotos[id_piloto][4] = nuevo_tiempo
-            print(f"Tiempo actualizado a {pilotos[id_piloto][4]} segs.")
-
-        elif opcion != 3:
-            print("Opcion invalida. Elija entre 1 y 3.")
+        ModificacionStatsPiloto(pilotos, pos, opcion)
 
 
 
@@ -287,3 +300,4 @@ def buscar_piloto_por_numero(pilotos, numero):
         return -1
     else:
         return i
+
