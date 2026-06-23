@@ -4,6 +4,13 @@ from funciones import *
 # TPO - GRUPO 3
 # ====================================================================
 def ingresar_monoplaza():
+    """
+    Solicita al usuario el número de monoplaza que desea eliminar y lo valida.
+    Asegura que el ingreso sea un número entero no negativo.
+
+    Retorna:
+        int: El número de monoplaza validado.
+    """
     n=input("Dime el numero del monoplaza que quieres eliminar: ")
     while not n.isdigit() or int(n) < 0:
         n = input("Numero de monoplaza invalido. Intente nuevamente: ")
@@ -11,6 +18,14 @@ def ingresar_monoplaza():
     return n
 
 def ejecutar_opcion_eliminar(pilotos):
+    """
+    Coordina el proceso de baja de un piloto en el sistema.
+    Busca al piloto por su número de monoplaza y, si existe, solicita
+    confirmación al usuario antes de eliminarlo de la lista principal.
+
+    Parámetros:
+        pilotos (list): Lista principal (matriz) que contiene los datos de los pilotos.
+    """
     print("\n [Acceso] Eliminar Piloto (Baja)")
     n=ingresar_monoplaza()
     pos=buscar_piloto_por_numero(pilotos, n)

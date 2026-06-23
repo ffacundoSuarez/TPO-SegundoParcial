@@ -64,6 +64,19 @@ def solicitar_entero_positivo(mensaje, mensaje_error):
     return int(valor)
 
 def agregarPiloto(pilotos, nombre, numero, escuderia, puntos, tiempo, presupuesto, abandonos):
+    """
+    Agrega un nuevo piloto con todos sus datos recopilados a la lista principal.
+
+    Parametros:
+        pilotos (list): Lista principal (matriz) de pilotos.
+        nombre (str): Nombre y apellido del piloto.
+        numero (int): Número identificatorio del monoplaza.
+        escuderia (str): Nombre del equipo o escudería.
+        puntos (int): Puntos acumulados en el campeonato.
+        tiempo (float): Tiempo promedio por vuelta en segundos.
+        presupuesto (float): Salario o presupuesto asignado.
+        abandonos (int): Cantidad de abandonos en la temporada.
+    """
     nuevo_piloto = [nombre, numero, escuderia, puntos, tiempo, presupuesto, abandonos]
     pilotos.append(nuevo_piloto)
     print(f"¡Piloto {nombre} registrado con éxito en la matriz!")
