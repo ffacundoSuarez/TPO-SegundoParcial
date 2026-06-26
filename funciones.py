@@ -15,7 +15,7 @@ def llenar():
         ["Lewis Hamilton", 44, "Mercedes", 310, 87.90, 2800000.00, 0],
         ["Sergio Pérez", 11, "RedBull", 180, 88.85, 2000000.00, 3],
         ["Carlos Sainz", 55, "Ferrari", 265, 88.25, 2150000.00, 1],
-        ["Oscar Piastri", 81, "McLaren", 180, 88.75, 1800000.00, 1],
+        ["Oscar Piastri", 85, "McLaren", 180, 88.75, 1800000.00, 1],
         ["George Russell", 63, "Mercedes", 220, 88.50, 1950000.00, 2],
         ["Fernando Alonso", 14, "Aston Martin", 120, 89.50, 1900000.00, 3]
     ]
@@ -63,6 +63,54 @@ def solicitar_entero_positivo(mensaje, mensaje_error):
         valor = input(mensaje_error)
     return int(valor)
 
+# ==========================================================================
+# BUSQUEDAS DE PILOTOS
+
+# Busca el monoplaza por número
+# Hecho por Juan Ignacio Teruya
+def buscar_piloto_por_numero(pilotos, numero):
+    """
+    Busca un piloto por su número de monoplaza usando un ciclo while.
+    
+    Parametros:
+        pilotos (list): lista principal de pilotos
+        numero (int): número a buscar
+    
+    Retorna:
+        int: índice del piloto encontrado, o -1 si no existe
+    """
+    i = 0
+    while i < len(pilotos) and pilotos[i][1] != numero:
+        i += 1
+    
+    if i == len(pilotos):
+        return -1
+    else:
+        return i
+
+# Ejercicio 3 -- Modificacion Puntos o Tiempos de un piloto
+# Busca el piloto por nombre
+# Hecho por Facundo Suarez
+def buscar_piloto_por_nombre(pilotos, nombre):
+    """
+    Busca un piloto por su nombre usando un ciclo while.
+    Parametros:
+        pilotos (list): lista principal de pilotos
+        nombre (str): nombre a buscar
+    Retorna:
+        int: indice del piloto encontrado, o -1 si no existe
+    """
+    i = 0
+    while i < len(pilotos) and pilotos[i][0].lower() != nombre.lower():
+        i += 1
+
+    if i == len(pilotos):
+        return -1
+    else:
+        return i
+
+# ===============================================================================================================
+
 def agregarPiloto(pilotos, nombre, numero, escuderia, puntos, tiempo, presupuesto, abandonos):
     """
     Agrega un nuevo piloto con todos sus datos recopilados a la lista principal.
@@ -106,7 +154,7 @@ def registrarPilotos(pilotos):
             # Nombre (Debe tener exactamente dos palabras)
             nombre = input("Ingrese el nombre del piloto (debe tener dos palabras, nombre y apellido): ")
             while len(nombre.split()) != 2 or buscar_piloto_por_nombre(pilotos, nombre) != -1:
-                nombre = input("Nombre inválido (debe tener dos palabras). Intente nuevamente: ")
+                nombre = input("Nombre inválido. Intente nuevamente: ")
             
             # Número de monoplaza 
             numero = solicitar_entero_positivo(
@@ -183,25 +231,7 @@ def eliminar_piloto(pilotos,n):
 
 
 
-# Ejercicio 3 -- Modificacion Puntos o Tiempos de un piloto
-# Busca el piloto por nombre
-def buscar_piloto_por_nombre(pilotos, nombre):
-    """
-    Busca un piloto por su nombre usando un ciclo while.
-    Parametros:
-        pilotos (list): lista principal de pilotos
-        nombre (str): nombre a buscar
-    Retorna:
-        int: indice del piloto encontrado, o -1 si no existe
-    """
-    i = 0
-    while i < len(pilotos) and pilotos[i][0].lower() != nombre.lower():
-        i += 1
 
-    if i == len(pilotos):
-        return -1
-    else:
-        return i
 
 def mostrarDatosPiloto(piloto):
     """
@@ -224,18 +254,18 @@ def ModificacionStatsPiloto(pilotos, pos, opcion):
         opcion (int): opcion elegida (1 = puntos, 2 = tiempo, 3 = volver).
     """
     if opcion == 1:
-        nuevos_puntos = input("Ingrese los nuevos puntos acumulados (entero >= 0): ")
-        while not nuevos_puntos.isdigit():
-            nuevos_puntos = input("Valor invalido, debe ser un entero >= 0: ")
-        nuevos_puntos = int(nuevos_puntos)
+        nuevos_puntos = nuevos_puntos = solicitar_entero_no_negativo(
+            "Ingrese los nuevos puntos acumulados (entero >= 0): ",
+            "Valor invalido, debe ser un entero >= 0: "
+        )
         pilotos[pos][3] = nuevos_puntos
         print(f"Puntos actualizados a {pilotos[pos][3]}.")
 
     elif opcion == 2:
-        nuevo_tiempo = input("Ingrese el nuevo tiempo promedio en segundos (>= 0): ")
-        while not nuevo_tiempo.replace('.', '', 1).isdigit():
-            nuevo_tiempo = input("Tiempo invalido, debe ser un numero (puede tener decimales): ")
-        nuevo_tiempo = float(nuevo_tiempo)
+        nuevo_tiempo = solicitar_float(
+            "Ingrese el nuevo tiempo promedio en segundos (>= 0): ",
+            "Tiempo invalido, debe ser un numero (puede tener decimales): "
+        )
         pilotos[pos][4] = nuevo_tiempo
         print(f"Tiempo actualizado a {pilotos[pos][4]} segs.")
 
@@ -245,12 +275,10 @@ def ModificacionStatsPiloto(pilotos, pos, opcion):
 # Hecho por Facundo Suarez
 def MenuModificacion(pilotos, pos):
     """
-    Permite modificar los puntos acumulados y/o el tiempo promedio por vuelta de un piloto.
-    El usuario elige si buscar al piloto por nombre o por numero de monoplaza.
-    Una vez encontrado, puede modificar uno o ambos valores en un submenu,
-    y volver al menu principal cuando lo desee.
+    SubMenu donde se le pregunta al usuario que quiere modificar de el piloto elegido. Tiene la opcion de modificar sus puntos, su tiempo promedio, o de volver al menu principal
     Parametros:
         pilotos (list): lista principal de pilotos.
+        pos (int): indice del piloto a modificar
     """
     opcion = 0  
     while opcion != 3:
@@ -263,8 +291,8 @@ def MenuModificacion(pilotos, pos):
         opcion = input("Seleccione una opcion (1-3): ")
         while not opcion.isdigit() or int(opcion) < 1 or int(opcion) > 3:
             opcion = input("Opcion invalida, ingrese 1, 2 o 3: ")
-        opcion = int(opcion)    
-
+        opcion = int(opcion)
+        
         ModificacionStatsPiloto(pilotos, pos, opcion)
 
 
@@ -316,25 +344,5 @@ def informeGeneral(pilotos):
     ordenarPilotos(pilotos)
     mostrarPilotos(pilotos)
 
-# Busca el monoplaza por número
-# Hecho por Juan Ignacio Teruya
-def buscar_piloto_por_numero(pilotos, numero):
-    """
-    Busca un piloto por su número de monoplaza usando un ciclo while.
-    
-    Parametros:
-        pilotos (list): lista principal de pilotos
-        numero (int): número a buscar
-    
-    Retorna:
-        int: índice del piloto encontrado, o -1 si no existe
-    """
-    i = 0
-    while i < len(pilotos) and pilotos[i][1] != numero:
-        i += 1
-    
-    if i == len(pilotos):
-        return -1
-    else:
-        return i
+
 

@@ -11,10 +11,10 @@ def ingresar_monoplaza():
     Retorna:
         int: El número de monoplaza validado.
     """
-    n=input("Dime el numero del monoplaza que quieres eliminar: ")
-    while not n.isdigit() or int(n) < 0:
-        n = input("Numero de monoplaza invalido. Intente nuevamente: ")
-    n = int(n)
+    n = solicitar_entero_no_negativo(
+        "Dime el numero del monoplaza que quieres eliminar: ",
+        "Numero de monoplaza invalido. Intente nuevamente: "
+    )
     return n
 
 def ejecutar_opcion_eliminar(pilotos):
@@ -74,10 +74,10 @@ def main():
                 nombre = input("Ingrese el nombre del piloto: ")
                 pos = buscar_piloto_por_nombre(pilotos, nombre)
             else:
-                numero = input("Ingrese el numero de monoplaza: ")
-                while not numero.isdigit() or int(numero) <= 0:
-                    numero = input("Debe ser un numero entero positivo: ")
-                numero = int(numero)
+                numero = solicitar_entero_positivo(
+                    "Ingrese el numero de monoplaza: ",
+                    "Debe ser un numero entero positivo: "
+                )
                 pos = buscar_piloto_por_numero(pilotos, numero)
 
             if pos == -1:
